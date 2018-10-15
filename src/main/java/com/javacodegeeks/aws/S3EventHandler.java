@@ -29,7 +29,7 @@ import com.amazonaws.util.IOUtils;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * @author psveh
+ * @author peter
  *
  */
 @Log4j2
