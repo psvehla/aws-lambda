@@ -3,8 +3,11 @@
  */
 package au.com.redbarn.aws.lambda2lambda;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
+import com.amazonaws.services.lambda.invoke.LambdaFunction;
+import com.amazonaws.services.lambda.invoke.LambdaInvokerFactory;
+
+import lombok.Data;
 
 /**
  * @author peter
@@ -12,8 +15,27 @@ import java.util.Date;
  */
 public class APIGatewayCallingLambdaHandler {
 	
+	@Data
+	public static class Request {
+		String name;
+	}
+	
+	@Data
+	public static class Response {
+		String message;
+	}
+	
+	public interface LambdaCalleeService {
+		@LambdaFunction(functionName="lambdaCalleeHandler")
+		Response getPersonalisedDate(Request req);
+	}
+		
 	public String handleRequest() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-		return sdf.format(new Date());
+		final LambdaCalleeService lambdaCalleeService = LambdaInvokerFactory.builder().lambdaClient(AWSLambdaClientBuilder.defaultClient()).build(LambdaCalleeService.class);
+		
+		Request req = new Request();
+		req.setName("Peter");
+		
+		return lambdaCalleeService.getPersonalisedDate(req).getMessage();
 	}
 }
