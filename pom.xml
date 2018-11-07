@@ -45,6 +45,12 @@
 		    <artifactId>aws-java-sdk-lambda</artifactId>
 		    <version>1.11.434</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-sqs</artifactId>
+		    <version>1.11.440</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>

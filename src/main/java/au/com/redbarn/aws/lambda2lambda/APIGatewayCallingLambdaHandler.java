@@ -30,12 +30,8 @@ public class APIGatewayCallingLambdaHandler {
 		Response getPersonalisedDate(Request req);
 	}
 		
-	public String handleRequest() {
+	public String handleRequest(Request req) {
 		final LambdaCalleeService lambdaCalleeService = LambdaInvokerFactory.builder().lambdaClient(AWSLambdaClientBuilder.defaultClient()).build(LambdaCalleeService.class);
-		
-		Request req = new Request();
-		req.setName("Peter");
-		
 		return lambdaCalleeService.getPersonalisedDate(req).getMessage();
 	}
 }
