@@ -22,11 +22,10 @@ public class APIGatewaySQSProducerLambda {
 	
 	@Data
 	public static class Request {
-		// TODO: make this private
-		// TODO: change this to message
-		String name;
+		private String message;
 	}
 	
+	// TODO: either remove this or get handleRequest() to return a response object
 	@Data
 	public static class Response {
 		String message;
@@ -52,7 +51,9 @@ public class APIGatewaySQSProducerLambda {
         	}
         }
         
-        sqs.sendMessage(new SendMessageRequest(theQueueUrl, req.getName()));
+        log.info("message = " + req.getMessage());
+        
+        sqs.sendMessage(new SendMessageRequest(theQueueUrl, req.getMessage()));
 
         return "Ok";
 	}
